@@ -12,11 +12,11 @@ const image = require ('./controllers/image');
 const db = knex({
   client: "pg",
   connection: {
-    host: "postgresql-flexible-60784",
-    user: "postgres",
-    password: "123456",
-    database: "postgres",
-  },
+    host: process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: false
+    }
+  }
 });
 
 db.select('*').from('users').then(data =>{
